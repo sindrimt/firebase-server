@@ -2,27 +2,28 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const admin = require("firebase-admin");
 const cors = require("cors");
+const service = require("/etc/secrets/service.json");
 
 const dotenv = require("dotenv");
 dotenv.config();
 
 const collectionName = "fundingPipsData";
 
-const service = {
-    type: "service_account",
-    project_id: "phantom-core-ai-6a238",
-    client_email: "firebase-adminsdk-hl76x@phantom-core-ai-6a238.iam.gserviceaccount.com",
-    client_id: "115999586882716618126",
-    auth_uri: "https://accounts.google.com/o/oauth2/auth",
-    token_uri: "https://oauth2.googleapis.com/token",
-    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-hl76x%40phantom-core-ai-6a238.iam.gserviceaccount.com",
-    private_key: process.env.FIREBASE_PRIVATE_KEY,
-    private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-    universe_domain: "googleapis.com",
-};
+// const service = {
+//     type: "service_account",
+//     project_id: "phantom-core-ai-6a238",
+//     client_email: "firebase-adminsdk-hl76x@phantom-core-ai-6a238.iam.gserviceaccount.com",
+//     client_id: "115999586882716618126",
+//     auth_uri: "https://accounts.google.com/o/oauth2/auth",
+//     token_uri: "https://oauth2.googleapis.com/token",
+//     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+//     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-hl76x%40phantom-core-ai-6a238.iam.gserviceaccount.com",
+//     private_key: process.env.FIREBASE_PRIVATE_KEY,
+//     private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+//     universe_domain: "googleapis.com",
+// };
 
-console.log(service);
+// console.log(service);
 
 admin.initializeApp({
     credential: admin.credential.cert(service),

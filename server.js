@@ -78,6 +78,27 @@ app.post("/updateChatMessage", async (req, res) => {
     }
 });
 
+app.post("/updateIntercomId", async (req, res) => {
+    try {
+        const { chatID, intercomId } = req.body;
+        const fundingPipsDataRef = db.collection(collectionName);
+        const querySnapshot = await fundingPipsDataRef.where("chatID", "==", chatID).get();
+
+        if (!querySnapshot.empty) {
+            const docRef = querySnapshot.docs[0].ref;
+            await docRef.update({
+                intercomId: intercomId,
+            });
+            res.status(200).json({ success: true, message: "Chat updated successfully." });
+        } else {
+            res.status(404).json({ success: false, message: "No chat found with the given chatID." });
+        }
+    } catch (error) {
+        console.error("Error updating chat message:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error." });
+    }
+});
+
 app.get("/fetchChatDetails", async (req, res) => {
     try {
         const userID = req.query.userID;

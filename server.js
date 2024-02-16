@@ -120,6 +120,27 @@ app.get("/fetchChatDetails", async (req, res) => {
     }
 });
 
+app.get("/fetchChatDetails", async (req, res) => {
+    try {
+        const chatID = req.query.chatID;
+        const fundingPipsDataRef = db.collection(collectionName);
+        const querySnapshot = await fundingPipsDataRef.where("chatID", "==", chatID).get();
+
+        const userChatDetails = querySnapshot.docs.map((doc) => ({
+            chatID: doc.data().chatID,
+            message: doc.data().message,
+            timestamp: doc.data().timestamp,
+            transcriptID: doc.data().transcriptID,
+            // Include other fields as necessary
+        }));
+
+        res.status(200).json({ success: true, data: userChatDetails });
+    } catch (error) {
+        console.error("Error fetching chat details:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error." });
+    }
+});
+
 app.delete("/deleteChatMessage", async (req, res) => {
     try {
         const { chatID } = req.body;

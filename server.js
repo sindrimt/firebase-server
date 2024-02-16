@@ -120,7 +120,7 @@ app.get("/fetchChatDetails", async (req, res) => {
     }
 });
 
-app.get("/fetchChatDetails", async (req, res) => {
+app.get("/fetchChat", async (req, res) => {
     try {
         const chatID = req.query.chatID;
         const fundingPipsDataRef = db.collection(collectionName);

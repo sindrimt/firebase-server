@@ -110,6 +110,8 @@ app.get("/fetchChatDetails", async (req, res) => {
             message: doc.data().message,
             timestamp: doc.data().timestamp,
             transcriptID: doc.data().transcriptID,
+            intercomId: doc.data().intercomId,
+
             // Include other fields as necessary
         }));
 
@@ -131,6 +133,7 @@ app.get("/fetchChat", async (req, res) => {
             message: doc.data().message,
             timestamp: doc.data().timestamp,
             transcriptID: doc.data().transcriptID,
+            intercomId: doc.data().intercomId,
             // Include other fields as necessary
         }));
 

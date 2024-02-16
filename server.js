@@ -122,7 +122,7 @@ app.get("/fetchChatDetails", async (req, res) => {
 
 app.get("/fetchChat", async (req, res) => {
     try {
-        const chatID = req.query.chatID;
+        const chatID = req.body.chatID;
         const fundingPipsDataRef = db.collection(collectionName);
         const querySnapshot = await fundingPipsDataRef.where("chatID", "==", chatID).get();
 
